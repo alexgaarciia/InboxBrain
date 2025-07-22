@@ -7,7 +7,40 @@ from email.parser import BytesParser
 
 ses = boto3.client('ses')
 
-def send_response_email(from_address, to_address, subject):
+def send_response_email(from_address, to_address, subject, body_text):
+    """
+    Sends a confirmation email using AWS SES in reply to a received message.
+
+    Args:
+        from_address (str): Email address of your system.
+        to_address (str): Email address of the original sender.
+        subject (str): Subject of the original email.
+    """
+    # Extract the actual email address (e.g., from "Name <email@example.com>")
+    real_email = email.utils.parseaddr(to_address)[1]
+
+    if not real_email:
+        return  # Skip if address is invalid
+
+    # Build the subject line for the response
+    subject_line = f"Re: {subject}" if subject else "Re: your email"
+
+    # Send the email via AWS SES
+    ses.send_email(
+        Source=from_address,
+        Destination={"ToAddresses": [real_email]},
+        Message={
+            "Subject": {"Data": subject_line},
+            "Body": {
+                "Text": {
+                    "Data": body_text,
+                    "Charset": "UTF-8"
+                }
+            }
+        }
+    )
+
+def test_send_response_email(from_address, to_address, subject):
     """
     Sends a confirmation email using AWS SES in reply to a received message.
 
