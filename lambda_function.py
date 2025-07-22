@@ -1,7 +1,7 @@
 import boto3
 from email import policy
 from email.parser import BytesParser
-from email_utils import send_response_email, extract_excel
+from utils.email_utils import send_response_email, extract_excel
 
 s3 = boto3.client('s3')
 
