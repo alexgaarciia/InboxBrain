@@ -25,3 +25,19 @@ This project integrates several AWS services and Python modules to create a full
 | <img src="https://github.com/alexgaarciia/InboxBrain/blob/main/images/icons/lambda.png" width="50"> | **AWS Lambda**       | A serverless compute service that lets you run code without provisioning or managing servers.                                                    |
 | <img src="https://github.com/alexgaarciia/InboxBrain/blob/main/images/icons/sagemaker.png" width="50"> | **Amazon Bedrock**   | A fully managed service to build and scale generative AI applications using foundation models via API.                                           |
 
+## Architecture
+The following diagram illustrates the full flow of the system, from the moment the user sends an email to the generation and delivery of the AI-generated response:
+
+<p align="center">
+  <img src="https://github.com/alexgaarciia/InboxBrain/blob/main/images/aws_architecture.png" alt="Architecture Diagram" width="750">
+</p>
+
+## Deployment Guide
+
+To deploy this project in your own AWS account, follow the detailed step-by-step guides available in the `docs/` folder:
+
+1. [Set up Amazon WorkMail](docs/workmail.md)  
+2. [Configure Amazon SES](docs/ses.md)  
+3. [Create and configure Amazon S3](docs/s3.md)  
+4. [Deploy the Lambda function](docs/lambda.md)  
+5. [Enable access to Amazon Bedrock](docs/bedrock.md)  
