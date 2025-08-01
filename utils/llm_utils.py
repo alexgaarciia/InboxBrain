@@ -23,7 +23,7 @@ def call_mistral_llm(email_body: str, excel_content: str) -> str:
             f"and answers any questions users might have about them.\n\n"
             f"The user has sent the following email:\n{email_body}\n\n"
             f"The content of the Excel file (as plain text) is:\n{excel_content}\n\n"
-            f"Please respond in a helpful, concise way. [/INST]"
+            f"Please respond in a helpful, concise way, and ALWAYS using the user's language. [/INST]"
         )
         
         body = {
