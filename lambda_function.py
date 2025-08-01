@@ -1,48 +1,49 @@
-import os
-import logging
-import json
+import base64
 import boto3
+import email
+from email import policy
+from email.parser import BytesParser
 
-def get_llm_client():
-    """
-    Initialize and return a boto3 Bedrock Runtime client.
-    No API key needed; uses AWS IAM.
-    """
-    return boto3.client("bedrock-runtime")
+from utils.email_utils import extract_excel, send_response_email
+from utils.llm_utils import call_mistral_llm
 
-def call_mistral_llm(email_body: str, excel_content: str) -> str:
-    """
-    Call AWS Bedrock Mistral model with the email body and Excel content.
-    Returns the model's generated response.
-    """
+s3 = boto3.client('s3')
+
+def lambda_handler(event, context):
     try:
-        client = get_llm_client()
+        # Extract SES and S3 info from the event trigger
+        record = event['Records'][0]
+        bucket = record['s3']['bucket']['name']
+        key = record['s3']['object']['key']
 
-        prompt = (
-            f"<s>[INST] You are an assistant that summarizes tabular data from Excel files "
-            f"and answers any questions users might have about them.\n\n"
-            f"The user has sent the following email:\n{email_body}\n\n"
-            f"The content of the Excel file (as plain text) is:\n{excel_content}\n\n"
-            f"Please respond in a helpful, concise way, and ALWAYS using the user's language. [/INST]"
-        )
-        
-        body = {
-            "prompt": prompt,
-            "max_tokens": 512,
-            "temperature": 0.7,
-            "top_p": 0.9
+        # Download the raw .eml email file from S3
+        response = s3.get_object(Bucket=bucket, Key=key)
+        raw_email = response['Body'].read()
+
+        # Parse the email using Python's built-in email tools
+        msg = BytesParser(policy=policy.default).parsebytes(raw_email)
+        sender = msg['From']
+        recipient = msg['To']
+        subject = msg['Subject']
+        body = msg.get_body(preferencelist=('plain', 'html')).get_content()
+
+        # Extract structured content from the Excel or CSV attachment
+        excel_content = extract_excel(raw_email)
+
+        # Use Mistral (via AWS Bedrock) to generate a reply based on the email and spreadsheet content
+        llm_response = call_mistral_llm(body, excel_content)
+
+        # Send the generated response back to the original sender via SES
+        send_response_email(recipient, sender, subject, llm_response)
+
+        return {
+            'statusCode': 200,
+            'body': 'Response sent successfully.'
         }
 
-        response = client.invoke_model(
-            modelId="mistral.mixtral-8x7b-instruct-v0:1",
-            contentType="application/json",
-            accept="application/json",
-            body=json.dumps(body)
-        )
-
-        response_body = json.loads(response['body'].read())
-        return response_body["outputs"][0]["text"].strip()
-
     except Exception as e:
-        logging.exception("Error calling AWS Bedrock Mistral model: %s", e)
-        return ""
+        logger.exception("Error processing the email")
+        return {
+            'statusCode': 500,
+            'body': f"Error: {str(e)}"
+        }
