@@ -30,3 +30,6 @@ After the organization is ready:
 - Choose a descriptive user name (alias) that matches your project goals. For example: `assistant@inboxbrain.awsapps.com`.
 - Multiple mailboxes can be created if you need to separate workflows or environments.
 - Each user gets login credentials for webmail or third-party email clients.
+
+## 4. Next Step: Amazon SES Integration
+Once your WorkMail organization and user mailboxes are configured, continue with the [setup of Amazon SES](https://github.com/alexgaarciia/InboxBrain/blob/main/docs/ses.md) to process and route incoming emails.
