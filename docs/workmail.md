@@ -21,13 +21,12 @@ Enter an alias that will be used in your email address, e.g. inboxbrain, to crea
 5. Finish and wait:
 Complete the creation process. AWS will provision the organization and set up the selected domain. This may take a few minutes.
 
-**Tip**: For most projects and initial testing, the free test domain is sufficient and requires no DNS configuration.
+**Tip: For most projects and initial testing, the free test domain is sufficient and requires no DNS configuration.**
 
 ## 3. Creating Users and Mailboxes
 After the organization is ready:
 - Navigate to the “Users” section within your WorkMail organization.
 - Click “Add user” to create new mailboxes.
-- Choose a descriptive user name (alias) that matches your project goals. For example: assistant@inboxbrain.awsapps.com
+- Choose a descriptive user name (alias) that matches your project goals. For example: `assistant@inboxbrain.awsapps.com`.
 - Multiple mailboxes can be created if you need to separate workflows or environments.
 - Each user gets login credentials for webmail or third-party email clients.
-
