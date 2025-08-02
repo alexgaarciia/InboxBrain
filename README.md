@@ -40,4 +40,3 @@ To deploy this project in your own AWS account, follow the detailed step-by-step
 2. [Create and configure Amazon S3](docs/s3.md)  
 3. [Configure Amazon SES](docs/ses.md)  
 4. [Deploy the Lambda function](docs/lambda.md)  
-5. [Enable access to Amazon Bedrock](docs/bedrock.md)  
