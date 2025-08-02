@@ -14,7 +14,7 @@ Steps:
 
 Once the function is created, you can either:
 1. Use the code provided in this repository, adapting it as needed for your workflow,
-2. Write your own logic from scratch to process and respond to incoming emails.
+2. Write your own logic from scratch to process and respond to incoming emails (check out [this link](https://github.com/alexgaarciia/InboxBrain/blob/main/docs/bedrock.md) if you plan on using Amazon Bedrock)
 
 **Important: Every time you make changes to the Lambda code, you must click “Deploy” in the AWS Lambda console for your changes to take effect.**
 
@@ -62,3 +62,4 @@ Steps:
 5. Save changes.
 
 Now, every time a new .eml file is added to the bucket, your Lambda function will be triggered automatically.
+
