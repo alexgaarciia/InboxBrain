@@ -36,7 +36,7 @@ aws iam create-role   --role-name <desired-role-name>   --assume-role-policy-doc
 
 2. Attach the Permissions Policy (replace `<your-bucket-name>` with your actual bucket name).
 ```
-aws iam put-role-policy   --role-name <desired-role-name>   --policy-name AllowSESToWriteToS3   --policy-document '{
+aws iam put-role-policy   --role-name <desired-role-name>   --policy-name <desired-policy-name>   --policy-document '{
     "Version": "2012-10-17",
     "Statement": [
       {
@@ -66,3 +66,4 @@ To process incoming emails, create a receipt rule in SES:
 
 ## 5. Next Step: Processing Emails with Lambda
 After emails are delivered to your S3 bucket by SES, the next step is to [set up a Lambda function](https://github.com/alexgaarciia/InboxBrain/blob/main/docs/lambda.md) that is triggered by S3 events (e.g., file upload), so you can extract, analyze, and respond to each incoming email.
+
