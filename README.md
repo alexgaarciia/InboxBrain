@@ -36,8 +36,8 @@ The following diagram illustrates the full flow of the system, from the moment t
 
 To deploy this project in your own AWS account, follow the detailed step-by-step guides available in the `docs/` folder:
 
-1. [Set up Amazon WorkMail](docs/workmail.md)  
-2. [Configure Amazon SES](docs/ses.md)  
-3. [Create and configure Amazon S3](docs/s3.md)  
+1. [Set up Amazon WorkMail](docs/workmail.md)
+2. [Create and configure Amazon S3](docs/s3.md)  
+3. [Configure Amazon SES](docs/ses.md)  
 4. [Deploy the Lambda function](docs/lambda.md)  
 5. [Enable access to Amazon Bedrock](docs/bedrock.md)  
