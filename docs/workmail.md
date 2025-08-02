@@ -31,5 +31,5 @@ After the organization is ready:
 - Multiple mailboxes can be created if you need to separate workflows or environments.
 - Each user gets login credentials for webmail or third-party email clients.
 
-## 4. Next Step: Amazon SES Integration
-Once your WorkMail organization and user mailboxes are configured, continue with the [setup of Amazon SES](https://github.com/alexgaarciia/InboxBrain/blob/main/docs/ses.md) to process and route incoming emails.
+## 4. Next Step: Amazon S3 Integration
+Once your WorkMail organization and user mailboxes are configured, the next step is to [create and configure your Amazon S3 bucket](https://github.com/alexgaarciia/InboxBrain/blob/main/docs/s3.md), which will store incoming emails.
